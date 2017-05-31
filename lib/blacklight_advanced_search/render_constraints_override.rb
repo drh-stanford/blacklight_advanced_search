@@ -18,9 +18,9 @@ module BlacklightAdvancedSearch::RenderConstraintsOverride
     else
       content = []
       advanced_query.keyword_queries.each_pair do |field, query|
-        label = search_field_def_for_key(field)[:label]
+        search_field = blacklight_config.search_fields[field]
         content << render_constraint_element(
-          label, query,
+          search_field.label, query,
           :remove =>
             search_action_path(remove_advanced_keyword_query(field, my_params).except(:controller, :action))
         )
